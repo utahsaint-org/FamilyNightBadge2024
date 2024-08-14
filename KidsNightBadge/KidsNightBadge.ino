@@ -1,5 +1,5 @@
 #include <avr/io.h>
-//#include <util/delay.h>
+#include <util/delay.h>
 
 int MaxCycles=20;
 
@@ -53,12 +53,22 @@ void setup() {
 
 
 void loop() {
-  MorseCode("ASK JUPITER FOR A PRIZE");
+  MorseCode("SECRET MESSAGE");
   BinaryCount();
   RandomBlink();
   KnightRider();
   FastBlinker();
   FasterBlink();
+  Alternation();
+}
+
+void Alternation() {
+  for (int cycles=0; cycles < MaxCycles*5; cycles++) {
+    delay(100);
+    PORTB = 5;
+    delay(100);
+    PORTB = 2;
+  }
 }
 
 void BinaryCount() {
