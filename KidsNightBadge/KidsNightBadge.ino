@@ -48,26 +48,29 @@ void blink_morse(const char* morse) {
 
 
 void setup() {
+  // Sets up the Direct Write to LED Pins in an array
   DDRB |= (1 << PB0) | (1 << PB1) | (1 << PB2);
 }
 
 
 void loop() {
+  // ORDER AND LOOP OF BLINKING PATTERNS
   MorseCode("SECRET MESSAGE");
-  BinaryCount();
-  RandomBlink();
-  KnightRider();
-  FastBlinker();
-  FasterBlink();
-  Alternation();
+  BinaryCount(); // Counts 1 - 7 in Binary
+  RandomBlink(); // Randomly Chooses LEDs and turns them on.
+  KnightRider(); // Scan Back/forth
+  FastBlinker(); // Blink LEDs with an all-off after
+  FasterBlink(); // Same as above but with a faster blink
+  Alternation(); // Chase-like Function
 }
 
 void Alternation() {
+  //  Alternating the 3 LEDs
   for (int cycles=0; cycles < MaxCycles*5; cycles++) {
     delay(100);
-    PORTB = 5;
+    PORTB = 5; // outside 2 LEDs on
     delay(100);
-    PORTB = 2;
+    PORTB = 2; // inside 1 LED on
   }
 }
 
@@ -92,13 +95,16 @@ void RandomBlink() {
 void KnightRider() {
   for (int cycles=0; cycles < MaxCycles; cycles++) {
     int RiderDelay = 75;
+    // Fade LEFT
     PORTB=1; delay(RiderDelay); PORTB=2; delay(RiderDelay); PORTB=4; delay(RiderDelay+100); PORTB=0; delay(RiderDelay/2);
+    // Fade RIGHT
     PORTB=4; delay(RiderDelay); PORTB=2; delay(RiderDelay); PORTB=1; delay(RiderDelay+100); PORTB=0; delay(RiderDelay/2);
   }
 }
 
 void FastBlinker() {
   for (int cycles=0; cycles < MaxCycles*2; cycles++) {
+    // Just include 1,2,4 Binary which is LED 1,2,3 independently.
     int random = (rand() % 3 == 0) ? 1 : (rand() % 3 == 1) ? 2 : 4;
     PORTB = random;
     delay(20);
@@ -109,6 +115,7 @@ void FastBlinker() {
 
 void FasterBlink() {
   for (int cycles=0; cycles < MaxCycles*4; cycles++) {
+    // Randomly select any led configuration for 3 LEDs
     int random = rand() % 8;
     PORTB = random;
     delay(20);
