@@ -9,10 +9,10 @@ int MaxCycles = 20;
 #define DELAY_LONG 1000
 
 #define DOT_DURATION 300
-#define DASH_DURATION 900
-#define GAP_DURATION 200
-#define CHAR_GAP_DURATION 1000
-#define WORD_GAP_DURATION 3000
+#define DASH_DURATION 800
+#define GAP_DURATION 300
+#define CHAR_GAP_DURATION 200
+#define WORD_GAP_DURATION 4000
 
 // Morse code representation for A-Z and 0-9
 const char morse_code[36][5] = {
@@ -55,7 +55,7 @@ void setup() {
 
 void loop() {
   // ORDER AND LOOP OF BLINKING PATTERNS
-  MorseCode("SECRET MESSAGE");
+  MorseCode("SOLVED IT FIND ZEVLAG");
   BinaryCount();  // Counts 1 - 7 in Binary
   RandomBlink();  // Randomly Chooses LEDs and turns them on.
   KnightRider();  // Scan Back/forth
